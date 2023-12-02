@@ -18,6 +18,27 @@ interface Move {
   number: number;
 }
 
+function parseGame(input: string) {
+  const game = {
+    gameNr: parseInt(input.substring(5, input.indexOf(":"))),
+    draws: input
+      .substring(input.indexOf(":") + 2)
+      .split("; ")
+      .map((draw) => {
+        return {
+          moves: draw.split(", ").map((move) => {
+            return {
+              color: move.split(" ")[1] as Color,
+              number: parseInt(move.split(" ")[0]),
+            } as Move;
+          }),
+        } as Draw;
+      }),
+  } as Game;
+
+  return game;
+}
+
 function part1() {
   let sum = 0;
 
@@ -28,22 +49,7 @@ function part1() {
   for (let game of input.split("\n")) {
     game = game.trim();
     
-    const thisGame = {
-      gameNr: parseInt(game.substring(5, game.indexOf(":"))),
-      draws: game
-        .substring(game.indexOf(":") + 2)
-        .split("; ")
-        .map((draw) => {
-          return {
-            moves: draw.split(", ").map((move) => {
-              return {
-                color: move.split(" ")[1] as Color,
-                number: parseInt(move.split(" ")[0]),
-              } as Move;
-            }),
-          } as Draw;
-        }),
-    } as Game;
+    const thisGame = parseGame(game);
 
     let increase = true;
     for (const draw of thisGame.draws) {
@@ -72,22 +78,7 @@ function part2() {
   for (let game of input.split("\n")) {
     game = game.trim();
     
-    const thisGame = {
-      gameNr: parseInt(game.substring(5, game.indexOf(":"))),
-      draws: game
-        .substring(game.indexOf(":") + 2)
-        .split("; ")
-        .map((draw) => {
-          return {
-            moves: draw.split(", ").map((move) => {
-              return {
-                color: move.split(" ")[1] as Color,
-                number: parseInt(move.split(" ")[0]),
-              } as Move;
-            }),
-          } as Draw;
-        }),
-    } as Game;
+    const thisGame = parseGame(game);
 
     let red = 0;
     let green = 0;
