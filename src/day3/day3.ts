@@ -1,4 +1,3 @@
-import { match } from "assert";
 import * as utils from "../utils";
 
 const input = utils.getInput();
