@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Advent of Code 2023",
   "scripts": {
-    "aoc": "ts-node run.ts"
+    "aoc": "ts-node run.ts",
+    "newday": "ts-node cp.ts"
   },
   "author": "",
   "license": "ISC",
